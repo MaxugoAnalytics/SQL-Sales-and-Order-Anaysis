@@ -1,0 +1,120 @@
+CREATE TABLE ordersalesanalysis.Sales_data.Sales (
+    Order_ID INT PRIMARY KEY,
+    Order_Date DATE,
+    Ship_Mode VARCHAR(50),
+    Segment VARCHAR(50),
+    Country VARCHAR(100),
+    City VARCHAR(100),
+    State VARCHAR(100),
+    Postal_Code VARCHAR(20),
+    Region VARCHAR(50),
+    Category VARCHAR(100),
+    Product_ID VARCHAR(50),
+    Cost_Price DECIMAL(10, 2),
+    List_Price DECIMAL(10, 2),
+    Quantity INT,
+    Discount_Percent DECIMAL(5, 2),
+    Year INT,
+    Week INT,
+    Day_of_the_Week VARCHAR(20),
+    Discount_Amount DECIMAL(10, 2),
+    Sales_Price DECIMAL(10, 2),
+    Profit DECIMAL(10, 2)
+);
+
+SELECT * FROM `ordersalesanalysis.Sales_data.Sales` LIMIT 1000;
+
+--- Total Sales and Profit by Category
+select Category,
+sum(Sales_Price) as Total_Sales,
+sum(Profit) as Total_Profit
+from ordersalesanalysis.Sales_data.Sales
+group by Category
+order by  Total_Sales;
+
+--Average Profit by Region
+select Region,
+avg(Profit) as Average_Profit
+from ordersalesanalysis.Sales_data.Sales
+group by Region
+order by Average_Profit;
+
+--Total Sales, Cost, and Profit for Each Year
+SELECT Year,
+sum(Sales_Price) as Total_Sales,
+sum(Cost_Price) as Total_Cost,
+sum(Profit) as Total_Profit
+from ordersalesanalysis.Sales_data.Sales
+group by Year
+order by Total_Cost;
+
+--Top  Best-Selling Categories by Sales
+SELECT 
+    Category,
+    SUM(Sales_Price) AS Total_Sales
+FROM 
+   ordersalesanalysis.Sales_data.Sales
+GROUP BY 
+    Category
+ORDER BY 
+    Total_Sales DESC;
+
+--- Top 5 Cities by Total Profit
+select 
+City,
+sum(Profit) as Total_Profit
+from ordersalesanalysis.Sales_data.Sales
+group by City
+order by Total_Profit DESC
+limit 5;
+
+--Average Discount and Profit by Ship Mode
+select Ship_Mode,
+avg(Discount_Amount) as Average_Discount,
+AVG(Profit) AS Avg_Profit
+from  ordersalesanalysis.Sales_data.Sales
+group by Ship_Mode;
+
+-- Total Sales and Profit by Region
+SELECT Region,
+      SUM(Sales_Price) AS Total_Sales,
+      sum(Profit) as Total_Profit
+from  ordersalesanalysis.Sales_data.Sales
+group by Region
+ORDER BY 
+    Total_Sales DESC; 
+
+---Week Performance: Sales by Day of the Week
+select Week,
+ SUM(Sales_Price) AS Total_Sales
+from ordersalesanalysis.Sales_data.Sales
+group by Week
+order by Total_Sales DESC;
+
+---Most Profitable Products
+select Product_ID,
+ SUM(Profit) AS Total_Profit,
+    SUM(Sales_Price) AS Total_Sales
+from ordersalesanalysis.Sales_data.Sales
+group by Product_ID 
+ORDER BY Total_Profit DESC
+LIMIT 10;
+
+--- Products with Negative Profit
+SELECT  Product_ID,
+         SUM(Profit) AS Total_Profit
+FROM 
+    ordersalesanalysis.Sales_data.Sales
+GROUP BY 
+    Product_ID
+HAVING 
+    SUM(Profit) < 0
+ORDER BY 
+    Total_Profit;
+
+---Average Cost and Sales Price by Category
+select  Category,
+        avg(Cost_Price) as Average_Cost_Price,
+        avg(Sales_Price) as  Average_Sales_Price
+from ordersalesanalysis.Sales_data.Sales        
+group by Category;       
