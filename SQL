@@ -1,3 +1,4 @@
+```sql
 CREATE TABLE ordersalesanalysis.Sales_data.Sales (
     Order_ID INT PRIMARY KEY,
     Order_Date DATE,
