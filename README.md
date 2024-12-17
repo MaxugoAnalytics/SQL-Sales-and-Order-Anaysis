@@ -50,20 +50,7 @@ The dataset used in this project includes the following columns:
 
 ## SQL Query
 
-Below is the core SQL query used for monthly sales analysis:
+Below is the core SQL query used for the analysis:
 
 ```sql
-WITH MonthlySales AS (
-    SELECT EXTRACT(MONTH FROM Order_Date) AS Month,
-           SUM(Sales_Price) AS Total_Sales
-    FROM ordersalesanalysis.Sales_data.Sales
-    WHERE Year = 2023
-    GROUP BY EXTRACT(MONTH FROM Order_Date)
-)
-SELECT Month,
-       Total_Sales,
-       LAG(Total_Sales) OVER (ORDER BY Month) AS Previous_Month_Sales,
-       ROUND(((Total_Sales - LAG(Total_Sales) OVER (ORDER BY Month)) / 
-       LAG(Total_Sales) OVER (ORDER BY Month)) * 100, 2) AS Growth_Percent
-FROM MonthlySales
-ORDER BY Month;
+
