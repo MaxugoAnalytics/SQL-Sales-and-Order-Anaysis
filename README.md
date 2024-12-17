@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project focuses on analyzing sales data for the year 2023. The dataset contains information on orders, sales prices, discounts, and other related metrics. The primary goal is to generate insights such as total monthly sales, previous month sales, and month-over-month growth percentages. The analysis is performed using SQL queries on a PostgreSQL database.
+This project focuses on analyzing sales data for the year 2022 to 2023. The dataset contains information on orders, sales prices, discounts, and other related metrics. The primary goal is to generate insights such as total monthly sales, previous month sales, and month-over-month growth percentages. The analysis is performed using SQL queries on a PostgreSQL database.
 
 ---
 
